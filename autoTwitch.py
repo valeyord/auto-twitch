@@ -1,3 +1,4 @@
 # -*- coding: utf-8 -*-
 from subprocess import call
-# call(["audacious /home/rodrigo/Música/Interval.mp3"], shell=True)
+call(["google-chrome --new-window --window-size=100x100 --window-position=0,0] \
+--app='https://www.twitch.tv'"], shell=True)
