@@ -9,3 +9,7 @@ v0.1 Features:
 
 
 ps: This is my first project and it's main goal is only learning purposes
+
+# Comming up:
+- Add resolution select/detect to screens that aren't 1366x768
+- Add option to save and edit channels to the script home screen
