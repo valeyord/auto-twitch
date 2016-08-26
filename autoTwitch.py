@@ -8,12 +8,13 @@ print("""My Saved Channels:
     -amazhs
     -trumpsc
     """)
+PATH = "/home/rodrigo/python/myScripts/auto-twitch/"
 channel = raw_input("\nType a Twitch Channel: ")
 Popen(["google-chrome \
---user-data-dir='/home/rodrigo/python/myScripts/auto-twitch/chrome-video-data' \
+--user-data-dir='{}chrome-video-data' \
 --new-window --window-position=0,0 --window-size=990,768 \
---app='https://player.twitch.tv/?volume=0.5&channel={}'".format(channel)], shell=True)
+--app='https://player.twitch.tv/?volume=0.5&channel={}'".format(PATH, channel)], shell=True)
 Popen(["google-chrome \
---user-data-dir='/home/rodrigo/python/myScripts/auto-twitch/chrome-chat-data' \
+--user-data-dir='{}chrome-chat-data' \
 --new-window --window-position=1000,0 --window-size=366,768 \
---app='https://www.twitch.tv/{}/chat?popout='".format(channel)],shell=True)
+--app='https://www.twitch.tv/{}/chat?popout='".format(PATH, channel)],shell=True)
