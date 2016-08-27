@@ -3,6 +3,7 @@
 # Version 0.2
 # -*- coding: utf-8 -*-
 from subprocess import Popen, call
+import sys
 PATH ="/home/rodrigo/python/myScripts/auto-twitch/"
 def mainMenu():
     call(["clear"], shell=True)
@@ -21,17 +22,17 @@ def mainMenu():
         openTwitch(channel)
 
 def addChannel(x):
-    with open("{}savedChannels.txt".format(PATH), "a") as savedChannels:
+    with open("savedChannels.txt", "a") as savedChannels:
         savedChannels.write(x + "\n")
     mainMenu()
 def eraseChannel(y):
     if y == "all list":
-        open("{}savedChannels.txt".format(PATH), "w").close()
+        open("savedChannels.txt", "w").close()
         mainMenu()
     else:
-        with open("{}savedChannels.txt".format(PATH), "r") as savedChannels:
+        with open("savedChannels.txt", "r") as savedChannels:
             allChannels = savedChannels.readlines()
-        with open("{}savedChannels.txt".format(PATH), "w") as savedChannels:
+        with open("savedChannels.txt", "w") as savedChannels:
             for thisChannel in allChannels:
                 if thisChannel != y + "\n":
                     savedChannels.write(thisChannel)
@@ -46,5 +47,6 @@ def openTwitch(z):
     --user-data-dir='{}chrome-chat-data' \
     --new-window --window-position=1000,0 --window-size=366,768 \
     --app='https://www.twitch.tv/{}/chat?popout='".format(PATH, z)],shell=True)
+    sys.exit()
 
 mainMenu()
