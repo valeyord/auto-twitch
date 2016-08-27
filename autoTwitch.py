@@ -49,4 +49,5 @@ def openTwitch(z):
     --app='https://www.twitch.tv/{}/chat?popout='".format(PATH, z)],shell=True)
     sys.exit()
 
+    
 mainMenu()
