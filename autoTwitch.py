@@ -6,7 +6,7 @@ from subprocess import Popen, call
 PATH ="/home/rodrigo/python/myScripts/auto-twitch/"
 def mainMenu():
     call(["clear"], shell=True)
-    print ("My saved channels:")
+    print ("My saved channels:\n")
     with open("/home/rodrigo/python/myScripts/auto-twitch/savedChannels.txt", "r+") as savedChannels:
         print(savedChannels.read())
     print("Type 'add' before the channel to add it to the list")
@@ -26,7 +26,7 @@ def addChannel(x):
     mainMenu()
 def eraseChannel(y):
     if y == "all list":
-        Popen(["echo '' > {}savedChannels.txt".format(PATH)], shell=True)
+        open("{}savedChannels.txt".format(PATH), "w").close()
         mainMenu()
     else:
         with open("{}savedChannels.txt".format(PATH), "r") as savedChannels:
@@ -37,6 +37,7 @@ def eraseChannel(y):
                     savedChannels.write(thisChannel)
         mainMenu()
 def openTwitch(z):
+    print("\n*** lauching video and chat for {} ***\n".format(z))
     Popen(["google-chrome \
     --user-data-dir='{}chrome-video-data' \
     --new-window --window-position=0,0 --window-size=990,768 \
