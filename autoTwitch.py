@@ -4,11 +4,12 @@
 # -*- coding: utf-8 -*-
 from subprocess import Popen, call
 import sys
-PATH ="/home/rodrigo/python/myScripts/auto-twitch/"
+import os.path
+PATH = (os.path.dirname(os.path.realpath(__file__)))
 def mainMenu():
     call(["clear"], shell=True)
     print ("My saved channels:\n")
-    with open("/home/rodrigo/python/myScripts/auto-twitch/savedChannels.txt", "r+") as savedChannels:
+    with open("{}/savedChannels.txt".format(PATH), "r+") as savedChannels:
         print(savedChannels.read())
     print("Type 'add' before the channel to add it to the list")
     print("Type 'erase' before the channel to erase it from the list")
@@ -22,17 +23,17 @@ def mainMenu():
         openTwitch(channel)
 
 def addChannel(x):
-    with open("savedChannels.txt", "a") as savedChannels:
+    with open("{}/savedChannels.txt".format(PATH), "a") as savedChannels:
         savedChannels.write(x + "\n")
     mainMenu()
 def eraseChannel(y):
     if y == "all list":
-        open("savedChannels.txt", "w").close()
+        open("{}/savedChannels.txt".format(PATH), "w").close()
         mainMenu()
     else:
-        with open("savedChannels.txt", "r") as savedChannels:
+        with open("{}/savedChannels.txt".format(PATH), "r") as savedChannels:
             allChannels = savedChannels.readlines()
-        with open("savedChannels.txt", "w") as savedChannels:
+        with open("{}/savedChannels.txt".format(PATH), "w") as savedChannels:
             for thisChannel in allChannels:
                 if thisChannel != y + "\n":
                     savedChannels.write(thisChannel)
@@ -40,14 +41,14 @@ def eraseChannel(y):
 def openTwitch(z):
     print("\n*** lauching video and chat for {} ***\n".format(z))
     Popen(["google-chrome \
-    --user-data-dir='{}chrome-video-data' \
+    --user-data-dir='{0}/chrome-video-data' \
     --new-window --window-position=0,0 --window-size=990,768 \
-    --app='https://player.twitch.tv/?volume=0.5&channel={}'".format(PATH, z)], shell=True)
+    --app='https://player.twitch.tv/?volume=0.5&channel={1}'".format(PATH, z)], shell=True)
     Popen(["google-chrome \
-    --user-data-dir='{}chrome-chat-data' \
+    --user-data-dir='{0}/chrome-chat-data' \
     --new-window --window-position=1000,0 --window-size=366,768 \
-    --app='https://www.twitch.tv/{}/chat?popout='".format(PATH, z)],shell=True)
+    --app='https://www.twitch.tv/{1}/chat?popout='".format(PATH, z)],shell=True)
     sys.exit()
 
-    
+
 mainMenu()
