@@ -4,7 +4,7 @@ A python script to open a specified twitch.tv channel in a optimized window mode
 The objective of this script is to open a google-chrome window for video popout,
 and another for chat popout, displaying they side by side on the screen.
 #Requirements
-Google Chorme (google-chrome) installed
+Google Chrome (google-chrome) installed
 
 #Features
 v0.1 Features:
