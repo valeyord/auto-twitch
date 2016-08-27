@@ -10,6 +10,7 @@ def mainMenu():
     with open("/home/rodrigo/python/myScripts/auto-twitch/savedChannels.txt", "r+") as savedChannels:
         print(savedChannels.read())
     print("Type 'add' before the channel to add it to the list")
+    print("Type 'erase' before the channel to erase it from the list")
     print("Type 'erase all list' to clear the entire list")
     channel = raw_input("\nEnter a Twitch Channel: ")
     if channel[:4] == "add ":
@@ -20,12 +21,20 @@ def mainMenu():
         openTwitch(channel)
 
 def addChannel(x):
-    with open("/home/rodrigo/python/myScripts/auto-twitch/savedChannels.txt", "a") as savedChannels:
+    with open("{}savedChannels.txt".format(PATH), "a") as savedChannels:
         savedChannels.write(x + "\n")
     mainMenu()
 def eraseChannel(y):
     if y == "all list":
         Popen(["echo '' > {}savedChannels.txt".format(PATH)], shell=True)
+        mainMenu()
+    else:
+        with open("{}savedChannels.txt".format(PATH), "r") as savedChannels:
+            allChannels = savedChannels.readlines()
+        with open("{}savedChannels.txt".format(PATH), "w") as savedChannels:
+            for thisChannel in allChannels:
+                if thisChannel != y + "\n":
+                    savedChannels.write(thisChannel)
         mainMenu()
 def openTwitch(z):
     Popen(["google-chrome \
