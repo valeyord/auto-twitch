@@ -6,28 +6,35 @@ from subprocess import Popen, call
 PATH ="/home/rodrigo/python/myScripts/auto-twitch/"
 def mainMenu():
     call(["clear"], shell=True)
+    print ("My saved channels:")
     with open("/home/rodrigo/python/myScripts/auto-twitch/savedChannels.txt", "r+") as savedChannels:
         print(savedChannels.read())
-    print("Type 'add channel' to add a new channel to the list")
-    channel = raw_input("\nType a Twitch Channel: ")
+    print("Type 'add' before the channel to add it to the list")
+    print("Type 'erase all list' to clear the entire list")
+    channel = raw_input("\nEnter a Twitch Channel: ")
     if channel[:4] == "add ":
-        AddChannel(channel[4:])
+        addChannel(channel[4:])
+    if channel[:6] == "erase ":
+        eraseChannel(channel[6:])
     else:
-        OpenTwitch(channel)
+        openTwitch(channel)
 
-def AddChannel(x):
+def addChannel(x):
     with open("/home/rodrigo/python/myScripts/auto-twitch/savedChannels.txt", "a") as savedChannels:
         savedChannels.write(x + "\n")
     mainMenu()
-# Call google-chrome windows from terminal
-def OpenTwitch(y):
+def eraseChannel(y):
+    if y == "all list":
+        Popen(["echo '' > {}savedChannels.txt".format(PATH)], shell=True)
+        mainMenu()
+def openTwitch(z):
     Popen(["google-chrome \
     --user-data-dir='{}chrome-video-data' \
     --new-window --window-position=0,0 --window-size=990,768 \
-    --app='https://player.twitch.tv/?volume=0.5&channel={}'".format(PATH, y)], shell=True)
+    --app='https://player.twitch.tv/?volume=0.5&channel={}'".format(PATH, z)], shell=True)
     Popen(["google-chrome \
     --user-data-dir='{}chrome-chat-data' \
     --new-window --window-position=1000,0 --window-size=366,768 \
-    --app='https://www.twitch.tv/{}/chat?popout='".format(PATH, y)],shell=True)
+    --app='https://www.twitch.tv/{}/chat?popout='".format(PATH, z)],shell=True)
 
 mainMenu()
