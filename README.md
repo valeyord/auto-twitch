@@ -9,6 +9,7 @@ Google Chrome (google-chrome) installed
 #Features
 v0.1 Features:
 - Added the option to input the twitch channel the user wants to open.
+
 v0.2 Features:
 - Added a editable Channel List to help the user remeber his favorite channels
 - Now all the data is stored automatically in the script own directory
