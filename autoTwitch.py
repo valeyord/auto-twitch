@@ -9,7 +9,7 @@ PATH = (os.path.dirname(os.path.realpath(__file__)))
 def mainMenu():
     call(["clear"], shell=True)
     print ("My saved channels:\n")
-    with open("{}/savedChannels.txt".format(PATH), "r+") as savedChannels:
+    with open("{}/savedChannels.txt".format(PATH), "a+") as savedChannels:
         print(savedChannels.read())
     print("Type 'add' before the channel to add it to the list")
     print("Type 'erase' before the channel to erase it from the list")
